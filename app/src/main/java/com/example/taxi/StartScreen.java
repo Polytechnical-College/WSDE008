@@ -36,7 +36,7 @@ public class StartScreen extends AppCompatActivity {
 
         });
         history.setOnClickListener( v-> {
-            Intent intent = new Intent (this, Settings.class);
+            Intent intent = new Intent (this, History.class);
             intent.putExtra("token",getIntent().getExtras().getInt("token"));
             startActivity(intent);
             finish();
