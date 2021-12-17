@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         String pass = password.getText().toString();
         final String[] stte = {null};
         String us;
-        int token;
+        final int[] token = new int[1];
         if(uname.trim().equals("") && pass.trim().equals("")) {
              Toast.makeText(getApplicationContext(),"Data is clear", Toast.LENGTH_LONG).show();
         } else {
@@ -80,9 +80,15 @@ public class MainActivity extends AppCompatActivity {
                             while ((responseLine = br.readLine()) != null) {
                                 response.append(responseLine.trim());
                             }
+                            Log.d("Answer",response.toString());
                             JSONObject answer = new JSONObject(String.valueOf(response));
                             if(!answer.getJSONObject("notice").getString("token").toString().equals("")) {
-                                stte[0] = answer.getJSONObject("notice").getString("token").toString();
+                                Integer token = answer.getJSONObject("notice").getInt("token");
+                                Intent intent = new Intent(getApplicationContext(), StartScreen.class);
+                                intent.putExtra("token", token);
+                                intent.putExtra("username",uname);
+                                startActivity(intent);
+                                finish();
 
                             }
 
@@ -96,14 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-            if(stte[0] != null) {
-                token = Integer.parseInt(stte[0]);
-                Intent intent = new Intent(this, StartScreen.class);
-                intent.putExtra("token",token);
-                intent.putExtra("username",uname);
-                startActivity(intent);
-                finish();
-            }
+
 
         }
     }

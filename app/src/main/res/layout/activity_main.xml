@@ -68,6 +68,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/btn"
             android:padding="15dp"
+            android:textColor="@color/white"
             android:text="Sign In" />
     </LinearLayout>
 
